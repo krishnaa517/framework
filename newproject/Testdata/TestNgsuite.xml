@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite nsmr="testNg_suite">
+	<test name="testNg_test">
+		<classes>
+			<class name="modular_package.Modular_testable_class"/>
+			<class name="pom_package.POM_Testable_class"/>
+		</classes>
+	</test >
+</suite>

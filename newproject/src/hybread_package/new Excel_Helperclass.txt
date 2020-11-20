@@ -1,0 +1,94 @@
+package hybrid_newexcel_Package;
+
+
+import java.io.File;
+
+import hybrid_newexcel_Package.NewExcel_Connection_class;
+
+
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.Select;
+
+public class Helper_Class
+
+{
+	
+	public static WebDriver driver;
+	
+	public static void excel_helper_class(String filename, String sheetname)
+	
+	{
+		
+	NewExcel_Connection_class.Newexcel_Connection(filename, sheetname);
+	String app_url=NewExcel_Connection_class.sheet.getRow(1).getCell(0).getStringCellValue();
+	
+	//Application
+	driver=new FirefoxDriver();
+	driver.get(app_url);
+	driver.manage().window().maximize();		
+    }
+	
+	public static void excel_helper_class1(String filename, String sheetname,String imagename)
+	{
+		NewExcel_Connection_class.Newexcel_Connection(filename, sheetname);
+		
+		
+
+		//rows count in current excel sheet
+		int rc=NewExcel_Connection_class.sheet.getLastRowNum();
+		
+		//ForLoops
+		for (int i = 1; i < rc; i++) 
+		{
+			String proname=NewExcel_Connection_class.sheet.getRow(i).getCell(1).getStringCellValue();
+			String provalue=NewExcel_Connection_class.sheet.getRow(i).getCell(2).getStringCellValue();
+			String actions=NewExcel_Connection_class.sheet.getRow(i).getCell(3).getStringCellValue();
+			String inputdata=NewExcel_Connection_class.sheet.getRow(i).getCell(4).getStringCellValue();
+			
+			
+			switch (actions)
+			{
+			case "Textbox":
+				WebElement ele=driver.findElement(NewExcel_Locators_Class.excel_locators(proname, provalue));
+				ele.clear();
+				ele.sendKeys(inputdata);
+				break;
+				
+			case "Button":
+				WebElement ele1=driver.findElement(NewExcel_Locators_Class.excel_locators(proname, provalue));
+				ele1.click();
+				break;
+			case "Capturescreen":
+				try {
+					
+					File src=((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+					FileUtils.copyFile(src,new File("screens\\"+imagename+".png"));
+					
+					
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+
+				break;
+			case "Alert":
+				driver.switchTo().alert().accept();
+				break;
+				
+			case "dropdown":
+				Select drop=new Select(driver.findElement(NewExcel_Locators_Class.excel_locators(proname, provalue)));
+				drop.selectByVisibleText(inputdata);
+				break;
+				
+				
+			    default:
+				break;
+			}
+		}
+		
+	}
+}

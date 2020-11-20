@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="parameter_suite">
+    <test name="parameter_test">
+       <parameter name="browser" value="http://srssprojects.in/home.aspx"/>
+       <parameter name="username" value="Admin"/>
+        <parameter name="password" value="Admin"/>
+        
+    <classes>
+       <class name="parameter_package.Parameter_class"/>
+    </classes>
+   </test>
+</suite>

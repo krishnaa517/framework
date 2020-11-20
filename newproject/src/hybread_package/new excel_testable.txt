@@ -1,0 +1,38 @@
+package hybrid_newexcel_Package;
+
+import org.testng.annotations.Test;
+
+public class Newexcel_testable_class {
+	
+	@Test(priority=0)
+	public void Application()
+	{
+		Helper_Class.excel_helper_class("Hybridnew_excel.xlsx", "URL");
+	}
+
+	
+	@Test(priority=1)
+	public void Admin()
+	{
+		Helper_Class.excel_helper_class1("Hybridnew_excel.xlsx", "Admin", "Excelnew_Admin");
+	}
+	
+	@Test(priority=2)
+	public void Branches()
+	
+	{
+		Helper_Class.excel_helper_class1("Hybridnew_excel.xlsx", "Branches", "Excelnew_Branches");
+	}
+	
+	@Test(priority=3)
+	public void Roles()
+	{
+		Helper_Class.excel_helper_class1("Hybridnew_excel.xlsx","Roles", "Excelnew_Roles");
+	}
+	
+	@Test(priority=4)
+	public void Employees()
+	{
+		Helper_Class.excel_helper_class1("Hybridnew_excel.xlsx", "Employees", "Excelnew_Employees");
+	}
+}

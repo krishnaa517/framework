@@ -1,0 +1,58 @@
+package hybrid_newexcel_Package;
+
+import java.io.FileInputStream;
+
+
+
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+public class NewExcel_Connection_class
+
+{
+	
+	
+	public static XSSFWorkbook wbook;
+	public static XSSFSheet sheet;
+	public static XSSFRow row;
+	public static XSSFCell cell;
+	public static String path="Testdata\\";
+	
+	public static void Newexcel_Connection(String filename,String sheetname)
+	{
+		
+		try {
+			//How to create connection excel sheet to Selenium
+			FileInputStream fi= new FileInputStream(path+filename);
+			// get conectionwith workbook
+		   wbook =new XSSFWorkbook(fi);
+			//Create connection for sheet
+		   sheet=wbook.getSheet(sheetname);
+		  
+		   
+			
+			
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+	}
+	
+	
+	public static String excel_row(int col,int row)
+	
+	{
+		return sheet.getRow(row).getCell(col).getStringCellValue();
+		
+	}
+	
+	
+	
+	
+	
+
+}
+
